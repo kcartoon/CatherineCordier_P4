@@ -1,0 +1,29 @@
+# on précise ici que les fichiers .webp ont pour type MIME image/webp
+<Files *.webp>
+    Header set Vary "Accept-Encoding"
+    AddType "image/webp" .webp
+    AddEncoding webp .webp
+</Files>
+
+# on active la réécriture si ce n'est pas déjà fait
+RewriteEngine on
+RewriteBase /
+
+# pour les navigateurs qui précisent supporter webp
+# si l'équivalent du fichier existe en webp, on le sert à la place
+RewriteCond %{HTTP:Accept} image/webp
+RewriteCond %{REQUEST_FILENAME}.webp -f
+RewriteRule ^(.*)$ $1.webp [L]
+
+# si le navigateur accepte webp
+map $http_accept $webp_suffix {
+    default "";
+    "~*webp" ".webp";
+}
+
+# on envoie le webp
+location ~ \.(png|jpe?g)$ {
+    add_header Vary "Accept-Encoding";
+    add_header "Access-Control-Allow-Origin" "*";
+    try_files $uri$webp_suffix $uri =404;
+}
