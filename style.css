@@ -372,7 +372,6 @@ blockquote {
 
 @media (min-width: 768px) {
     .site-navigation {
-        position: absolute;
         top: 50%;
         right: 20px;
         transform: translate(0, -50%);
@@ -400,7 +399,6 @@ blockquote {
     }
     .nav-center .site-navigation {
         position: relative;
-        width: 100%;
         right: 0;
         margin-right: 0px;
         margin-top: 20px;
@@ -657,12 +655,7 @@ label,
 .btn,
 a {
     font-family: "helvetica";
-    font-weight: 400;
     color: black!important;
-}
-
-.container {
-    max-width: 1000px;
 }
 
 .hero-bloc-text {
@@ -880,12 +873,13 @@ h4 {
     .bloc {
         padding-left: constant(safe-area-inset-left);
         padding-right: constant(safe-area-inset-right);
-    }
+    }*/
     .bloc-group,
     .bloc-group .bloc {
         display: block;
         width: 100%;
     }
+    /*
     .bloc-fill-screen .fill-bloc-top-edge,
     .bloc-fill-screen .fill-bloc-bottom-edge {
         padding: 0 20px;
