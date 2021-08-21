@@ -1,4 +1,4 @@
-robots.txt du site https://kcartoon.github.io/CatherineCordier_P4/
+robots.txt du site https://www.webprojet.formaproactive.fr//
 User-agent: * (Autorise l’accès à tous les robots)
 
 Disallow: /wp-* (Pour bloquer l’accès à un répertoire commençant par /wp-)
