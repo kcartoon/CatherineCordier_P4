@@ -291,6 +291,41 @@
             padding-left: 0;
         }
         
+        footer .row {
+            display: flex;
+            flex-flow: row nowrap;
+            align-content: space-around;
+            justify-content: space-around;
+        }
+        
+        @media (max-width: 650px) {
+            .social {
+                display: grid !important;
+                grid-template-rows: 1fr 1fr;
+                grid-template-areas: "before before" "twitter facebook" 'dribble instagram';
+            }
+        }
+        
+        .social::before {
+            grid-area: before;
+        }
+        
+        #facebook {
+            grid-area: facebook;
+        }
+        
+        #dribble {
+            grid-area: dribble;
+        }
+        
+        #instagram {
+            grid-area: instagram;
+        }
+        
+        #twitter {
+            grid-area: twitter;
+        }
+        
         #bloc-1-hero h1 {
             font-size: 32px;
         }
@@ -812,7 +847,7 @@
         }
         
         .ltc-white {
-            color: #cccccc!important;
+            color: white!important;
         }
         
         .ltc-white:hover {
