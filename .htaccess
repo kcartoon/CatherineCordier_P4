@@ -1,0 +1,83 @@
+#Créer une redirection 301
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^https://kcartoon.github.io/CatherineCordier_P4/ [NC,OR]
+RewriteCond %{HTTP_HOST} ^https://www.kcartoon.github.io/CatherineCordier_P4/[NC]
+RewriteRule ^(.*)$ https://www.webprojet.formaproactive.fr/$1 [L,R=301,NC]
+
+< IfModule  mod_expires.c >
+  ExpireActive le
+ # Images 
+  ExpiresByType image/jpeg  "accès plus 1 an" 
+  ExpiresByType image/gif  "accès plus 1 an" 
+  ExpiresByType image/png  "accès plus 1 an" 
+  ExpiresByType image/webp  "accès plus 1 an" 
+  ExpiresByType image/svg+xml  "accès plus 1 an" 
+  ExpiresByType image/x-icon  "accès plus 1 an"
+
+  # Video 
+  ExpiresByType video/webm  "access plus 1 an" 
+  ExpiresByType video/mp4  "access plus 1 an" 
+  ExpiresByType video/mpeg  "access plus 1 an"
+
+  # Polices 
+  ExpiresByType font/ttf  "accès plus 1 an" 
+  ExpiresByType font/otf  "accès plus 1 an" 
+  ExpiresByType font/woff  "accès plus 1 an" 
+  ExpiresByType font/woff2  "accès plus 1 an" 
+  ExpiresByType application/font-woff  "accès plus 1 an"
+
+  # CSS, JavaScript 
+  ExpiresByType text/css  "accès plus 1 mois" 
+  ExpiresByType text/javascript  "accès plus 1 mois" 
+  ExpiresByType application/javascript  "accès plus 1 mois"
+
+  # Autres 
+  ExpiresByType application/pdf  "accès plus 1 mois" 
+  ExpiresByType image/vnd.microsoft.icon  "accès plus 1 an" 
+</ IfModule >
+
+<FilesMatch "\.(js|css|gif|jpg|jpeg|png|webp|ico)$">
+Header unset Cookie
+Header unset Set-Cookie
+
+Header set Cache-Control "max-age=31536000"
+
+Header set vary  "Accept-Encoding"
+Header append vary "User-Agent"
+Header append Cache-Control "public" 
+
+Header append Connection "Keep-Alive"
+Header append Keep-Alive "timeout=5, max=100"
+
+FileETag None
+</FilesMatch>
+
+# on précise ici que les fichiers .webp ont pour type MIME image/webp
+<Files *.webp>
+    Header set Vary "Accept-Encoding"
+    AddType "image/webp" .webp
+    AddEncoding webp .webp
+</Files>
+
+# on active la réécriture si ce n'est pas déjà fait
+RewriteEngine on
+RewriteBase /
+
+# pour les navigateurs qui précisent supporter webp
+# si l'équivalent du fichier existe en webp, on le sert à la place
+RewriteCond %{HTTP:Accept} image/webp
+RewriteCond %{REQUEST_FILENAME}.webp -f
+RewriteRule ^(.*)$ $1.webp [L]
+
+# si le navigateur accepte webp
+map $http_accept $webp_suffix {
+    default "";
+    "~*webp" ".webp";
+}
+
+# on envoie le webp
+location ~ \.(png|jpe?g)$ {
+    add_header Vary "Accept-Encoding";
+    add_header "Access-Control-Allow-Origin" "*";
+    try_files $uri$webp_suffix $uri =404;
+}
