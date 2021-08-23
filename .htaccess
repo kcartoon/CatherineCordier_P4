@@ -5,7 +5,7 @@ RewriteCond %{HTTP_HOST} ^https://www.kcartoon.github.io/CatherineCordier_P4/[NC
 RewriteRule ^(.*)$ https://www.webprojet.formaproactive.fr/$1 [L,R=301,NC]
 
 < IfModule  mod_expires.c >
-  ExpireActive le
+  ExpiresActive On
  # Images 
   ExpiresByType image/jpeg  "accès plus 1 an" 
   ExpiresByType image/gif  "accès plus 1 an" 

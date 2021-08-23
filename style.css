@@ -895,13 +895,13 @@
             }
         }
         
-        @media all and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+        @media (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
             .b-parallax {
                 background-attachment: scroll;
             }
         }
         
-        @media all and (min-device-width: 1024px) and (max-device-width: 1366px) {
+        @media (min-device-width: 1024px) and (max-device-width: 1366px) {
             .b-parallax {
                 background-attachment: scroll;
             }
