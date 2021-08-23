@@ -607,7 +607,8 @@
                         function(b) {
                             var c;
                             do
-                                if (c = n ? b.lang : b.getAttribute("xml:lang") || b.getAttribute("lang")) return c = c.toLowerCase(), c === a || 0 === c.indexOf(a + "-"); while ((b = b.parentNode) && 1 === b.nodeType);
+                                if (c = n ? b.lang : b.getAttribute("xml:lang") || b.getAttribute("lang")) return c = c.toLowerCase(), c === a || 0 === c.indexOf(a + "-");
+                            while ((b = b.parentNode) && 1 === b.nodeType);
                             return !1
                         }
                 }),
